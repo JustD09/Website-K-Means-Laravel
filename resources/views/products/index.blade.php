@@ -1,11 +1,11 @@
 @extends('layouts.app')
   
-@section('title', 'Home Product')
+@section('title', 'Penambahan data pembangunan infrastruktur ruas jalan')
   
 @section('contents')
     <div class="d-flex align-items-center justify-content-between">
-        <h1 class="mb-0">List Product</h1>
-        <a href="{{ route('products.create') }}" class="btn btn-primary">Add Product</a>
+        <h1 class="mb-0">Data Pembangunan Infrastruktur Ruas Jalan</h1>
+        <a href="{{ route('products.create') }}" class="btn btn-primary">Tambah Data</a>
     </div>
     <hr />
     @if(Session::has('success'))
@@ -16,12 +16,15 @@
     <table class="table table-hover">
         <thead class="table-primary">
             <tr>
-                <th>#</th>
-                <th>Title</th>
-                <th>Price</th>
-                <th>Product Code</th>
-                <th>Description</th>
-                <th>Action</th>
+                <th>No</th>
+                <th>Nama Jalan</th>
+                <th>Panjang Jalan</th>
+                <th>Deskripsi</th>
+                <th>Titik Kerusakan</th>
+                <th>Lebar Kerusakan</th>
+                <th>Status</th>
+                <th>Prioritas</th>
+                <th>Update, Delete, and Detail</th>
             </tr>
         </thead>
         <tbody>+
@@ -29,10 +32,14 @@
                 @foreach($product as $rs)
                     <tr>
                         <td class="align-middle">{{ $loop->iteration }}</td>
-                        <td class="align-middle">{{ $rs->title }}</td>
-                        <td class="align-middle">{{ $rs->price }}</td>
-                        <td class="align-middle">{{ $rs->product_code }}</td>
-                        <td class="align-middle">{{ $rs->description }}</td>  
+                        <td class="align-middle">{{ $rs->nama_jalan }}</td>
+                        <td class="align-middle">{{ $rs->panjang_jalan }}</td>
+                        <td class="align-middle">{{ $rs->Deskripsi }}</td>
+                        <td class="align-middle">{{ $rs->titik_kerusakan }}</td>
+                        <td class="align-middle">{{ $rs->lebar_kerusakan }}</td>
+                        <td class="align-middle">{{ $rs->Status }}</td>  
+                        <td class="align-middle">{{ $rs->Prioritas }}</td>
+                        {{-- <td class="align-middle">{{ $rs->Detail }}</td> --}}
                         <td class="align-middle">
                             <div class="btn-group" role="group" aria-label="Basic example">
                                 <a href="{{ route('products.show', $rs->id) }}" type="button" class="btn btn-secondary">Detail</a>
@@ -48,7 +55,7 @@
                 @endforeach
             @else
                 <tr>
-                    <td class="text-center" colspan="5">Product not found</td>
+                    <td class="text-center" colspan="10">Data Infrastruktur Jalan Tidak Ada !</td>
                 </tr>
             @endif
         </tbody>

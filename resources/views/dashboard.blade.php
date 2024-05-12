@@ -1,6 +1,10 @@
 @extends('layouts.app')
   
 @section('title', 'Penjadwalan Prioritas Pembangunan Infrastruktur Ruas Jalan')
+{{-- @section('js')
+    <script src="{{ $chart->cdn() }}"></script>
+  {{ $chart->script() }}
+@endsection --}}
   
 @section('contents')
 <script src="https://code.highcharts.com/highcharts.js"></script>
@@ -9,13 +13,14 @@
   </div>
 
   <div class="row mb-0">
-    <div id="chartTable"></div>
+    <div id="chartTable">
+        {{-- {!! $chart->chartTable() !!} --}}
+    </div>
   </div>
 
   <div class="row mb-1">
     <div id="dataTable"></div>
   </div>
-
   <script>
     Highcharts.chart('chartTable', {
     chart: {
@@ -57,7 +62,7 @@
 
   </script>
 
-  <table id="dataTable" class="table table-striped" style="width:100%">
+  <table id="dataTable" class="table table-striped table-bordered" style="width:100%">
         <thead>
             <tr>
                 <th>Name</th>
@@ -526,15 +531,8 @@
                 <td>$112,000</td>
             </tr>
         </tbody>
-        <tfoot>
-            <tr>
-                <th>Name</th>
-                <th>Position</th>
-                <th>Office</th>
-                <th>Age</th>
-                <th>Start date</th>
-                <th>Salary</th>
-            </tr>
-        </tfoot>
     </table>
+<script src="{{ asset ('admin_assets/vendor/datatables/jquery.dataTables.min.js') }}"></script>
+<script src="{{asset ('admin_assets/vendor/datatables/dataTables.bootstrap4.min.js')}}"></script>
+
 @endsection

@@ -9,6 +9,8 @@
   <title>Dashboard</title>
   <!-- Custom fonts for this template-->
   <link href="{{ asset('admin_assets/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
+  <link rel="stylesheet" href="https://cdn.datatables.net/2.0.7/css/dataTables.bootstrap4.css">
   <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
   
   <!-- Custom styles for this template-->
@@ -27,6 +29,11 @@
   
       <!-- Main Content -->
       <div id="content">
+
+        {{-- <main class="container py-5">
+          <h1>Data Prioritas Pembangunan Ruas Jalan</h1>
+          <hr>
+        </main> --}}
   
         <!-- Topbar -->
         @include('layouts.navbar')
@@ -39,7 +46,7 @@
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <h1 class="h3 mb-0 text-gray-800">@yield('title')</h1>
           </div>
-  
+          {{-- @yield('js') --}}
           @yield('contents')
   
           <!-- Content Row -->
@@ -75,5 +82,8 @@
   <script src="{{ asset('admin_assets/js/sb-admin-2.min.js') }}"></script>
   <!-- Page level plugins -->
   <script src="{{ asset('admin_assets/vendor/chart.js/Chart.min.js') }}"></script>
+  {{-- Data Table --}}
+  <script src="{{ asset ('admin_assets/vendor/datatables/jquery.dataTables.min.js') }}"></script>
+  <script src="{{asset ('admin_assets/vendor/datatables/dataTables.bootstrap4.min.js')}}"></script>
 </body>
 </html>

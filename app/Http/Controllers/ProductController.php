@@ -8,7 +8,7 @@ use App\Models\Product;
 class ProductController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display a listing of the resource. 
      */
     public function index()
     {
@@ -32,7 +32,7 @@ class ProductController extends Controller
     {
         Product::create($request->all());
  
-        return redirect()->route('products')->with('success', 'Product added successfully');
+        return redirect()->route('products')->with('success', 'Data berhasil ditambahkan!');
     }
   
     /**
@@ -64,7 +64,7 @@ class ProductController extends Controller
   
         $product->update($request->all());
   
-        return redirect()->route('products')->with('success', 'product updated successfully');
+        return redirect()->route('products')->with('success', 'Data berhasil diupdate!');
     }
   
     /**
@@ -76,6 +76,6 @@ class ProductController extends Controller
   
         $product->delete();
   
-        return redirect()->route('products')->with('success', 'product deleted successfully');
+        return redirect()->route('products')->with('success', 'Data berhasil dihapus!');
     }
 }

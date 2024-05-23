@@ -25,7 +25,7 @@
   </li>
 
   <li class="nav-item">
-    <a class="nav-link" href="{{ route('products') }}">
+    <a class="nav-link" href="/showData">
       <i class="fas fa-fw fa-list-alt"></i>
       <span>Laporan Hasil</span></a>
   </li>

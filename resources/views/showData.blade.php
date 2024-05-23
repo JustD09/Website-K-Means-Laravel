@@ -1,6 +1,6 @@
 @extends('layouts.app')
   
-@section('title', 'Penjadwalan Prioritas Pembangunan Infrastruktur Ruas Jalan')
+@section('title', 'Laporan Hasil Infrastruktur Ruas Jalan')
 {{-- @section('js')
     <script src="{{ $chart->cdn() }}"></script>
   {{ $chart->script() }}
@@ -9,14 +9,14 @@
 @section('contents')
 <script src="https://code.highcharts.com/highcharts.js"></script>
   <div class="row">
-    Kemen PUPR
+    Data Infrastruktur Ruas Jalan
   </div>
 
-  <div class="row mb-0">
+  {{-- <div class="row mb-0">
     <div id="chartTable">
-        {{-- {!! $chart->chartTable() !!} --}}
+        {!! $chart->chartTable() !!}
     </div>
-  </div>
+  </div> --}}
 
   <div class="row mb-1">
     <div id="dataTable">
@@ -24,7 +24,7 @@
         <a href="{{ route('products')}}"></a>
     </div>
   </div>
-  <script>
+  {{-- <script>
     Highcharts.chart('chartTable', {
     chart: {
         type: 'column'
@@ -63,7 +63,7 @@
     ]
 });
 
-  </script>
+  </script> --}}
 
   <table id="dataTable" class="table table-striped table-bordered" style="width:100%">
         <thead>
@@ -79,7 +79,16 @@
             </tr>
         </thead>
         <tbody>
-            
+            <tr>
+                <th>1</th>
+                <th>Jl. A</th>
+                <th>2 KM</th>
+                <th>xyz</th>
+                <th>2</th>
+                <th>3</th>
+                <th>Dalam Pengerjaan!</th>
+                <th>Prioritas</th>
+            </tr>
         </tbody>
     </table>
 <script src="{{ asset ('admin_assets/vendor/datatables/jquery.dataTables.min.js') }}"></script>

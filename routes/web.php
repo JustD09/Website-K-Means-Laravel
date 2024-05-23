@@ -5,7 +5,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProductController;
+use App\Models\Product;
 use App\Models\Post;
+use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 Route::get('/', function () {
     return view('auth.login');
@@ -26,7 +28,11 @@ Route::controller(AuthController::class)->group(function () {
 // Autentikasi setelah login
 Route::middleware('auth')->group(function () {
     Route::get('dashboard', function () {
-        return view('dashboard');
+        $category = Product::selectRaw('categories, SUM(categories) AS total')->groupBy('categories')->get();
+        $jumlahCategory = $category->pluck('categories')->toArray();
+        $totalCategory = $category->pluck('total')->toArray();
+        // $rows = Product::selectRaw('category_name, COUNT(*) AS total')
+        return view('dashboard', compact('category', 'jumlahCategory', 'totalCategory'));
     })->name('dashboard');
  
     // create, read, update, delete Controller
@@ -52,6 +58,6 @@ Route::middleware('auth')->group(function () {
     });
  
     Route::get('/profile', [App\Http\Controllers\AuthController::class, 'profile'])->name('profile');
-    Route::get('/users', [App\Http\Controllers\AdminController::class, 'dashboard'])->name('users.dashboard');
     Route::get('/showData', [App\Http\Controllers\AuthController::class,'showData'])->name('showData');
+    // Route::get('dashboard', [App\Http\Controllers\DashboardController::class, 'dashboard'])->name('dashboard');
 });

@@ -75,4 +75,5 @@ class AuthController extends Controller
     {
         return view('showData');
     }
+
 }

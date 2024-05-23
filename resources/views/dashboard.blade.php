@@ -31,7 +31,7 @@
                 type: 'column'
             },
             title: {
-                text: 'Data Prioritas Pembangunan Infrastruktur Ruas Jalan',
+                text: 'Grafik Cluster',
                 align: 'center'
             },
             xAxis: {
@@ -57,7 +57,7 @@
                 }
             },
             series: [{
-                name: 'Data Prioritas',
+                name: 'Data Cluster',
                 data: total,
             }, ]
         });

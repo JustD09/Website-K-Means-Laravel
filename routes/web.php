@@ -1,12 +1,13 @@
 <?php
 
-use App\Http\Controllers\AdminController;
+
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\PostController;
+use App\Http\Controllers\ClusterController;
 use App\Http\Controllers\ProductController;
 use App\Models\Product;
-use App\Models\Post;
+use App\Models\User;
+use App\Models\Cluster;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 Route::get('/', function () {
@@ -28,14 +29,17 @@ Route::controller(AuthController::class)->group(function () {
 // Autentikasi setelah login
 Route::middleware('auth')->group(function () {
     Route::get('dashboard', function () {
+        $dataHasil = Cluster::all();
         $category = Product::selectRaw('categories, SUM(categories) AS total')->groupBy('categories')->get();
         $jumlahCategory = $category->pluck('categories')->toArray();
         $totalCategory = $category->pluck('total')->toArray();
-        // $rows = Product::selectRaw('category_name, COUNT(*) AS total')
-        return view('dashboard', compact('category', 'jumlahCategory', 'totalCategory'));
+        $userCount = User::count();
+        $productCount = Product::count();
+        $clusterCount = Cluster::count();
+        return view('dashboard', compact('category', 'totalCategory', 'jumlahCategory', 'userCount', 'productCount', 'dataHasil', 'clusterCount'));
     })->name('dashboard');
  
-    // create, read, update, delete Controller
+    // CRUD table Product
     Route::controller(ProductController::class)->prefix('products')->group(function () {
         Route::get('', 'index')->name('products');
         Route::get('create', 'create')->name('products.create');
@@ -46,18 +50,19 @@ Route::middleware('auth')->group(function () {
         Route::delete('destroy/{id}', 'destroy')->name('products.destroy');
     });
 
-    // Post data
-    Route::controller(PostController::class)->prefix('post')->group(function () {
-        Route::get('', 'index')->name('post');
-        // Route::get('create', 'create')->name('products.create');
-        Route::post('store', 'store')->name('post.store');
-        Route::get('show/{id}', 'show')->name('post.show');
-        // Route::get('edit/{id}', 'edit')->name('products.edit');
-        // Route::put('edit/{id}', 'update')->name('products.update');
-        // Route::delete('destroy/{id}', 'destroy')->name('products.destroy');
+    // CRUD table Cluster
+    Route::controller(ClusterController::class)->prefix('clusters')->group(function () {
+        Route::get('', 'index')->name('clusters');
+        Route::get('create', 'create')->name('clusters.create');
+        Route::post('store', 'store')->name('clusters.store');
+        Route::get('show/{id}', 'show')->name('clusters.show');
+        Route::get('edit/{id}', 'edit')->name('clusters.edit');
+        Route::put('edit/{id}', 'update')->name('clusters.update');
+        Route::delete('destroy/{id}', 'destroy')->name('clusters.destroy');
     });
  
     Route::get('/profile', [App\Http\Controllers\AuthController::class, 'profile'])->name('profile');
+    Route::post('/profile.post', [App\Http\Controllers\AuthController::class, 'profile'])->name('profile.post');
     Route::get('/showData', [App\Http\Controllers\AuthController::class,'showData'])->name('showData');
-    // Route::get('dashboard', [App\Http\Controllers\DashboardController::class, 'dashboard'])->name('dashboard');
+    
 });

@@ -5,7 +5,7 @@
 @section('contents')
     <div class="d-flex align-items-center justify-content-between">
         <h1 class="mb-0">Data Pembangunan Infrastruktur Ruas Jalan</h1>
-        <a href="{{ route('products.create') }}" class="btn btn-primary">Tambah Data</a>
+        <a href="{{ route('clusters.create') }}" class="btn btn-primary">Tambah Data</a>
     </div>
     <hr />
     @if (Session::has('success'))
@@ -28,8 +28,8 @@
             </tr>
         </thead>
         <tbody>
-            @if ($product->count() > 0)
-                @foreach ($product as $rs)
+            @if ($cluster->count() > 0)
+                @foreach ($cluster as $rs)
                     <tr>
                         <td class="align-middle">{{ $loop->iteration }}</td>
                         <td class="align-middle">{{ $rs->nama_jalan }}</td>
@@ -52,11 +52,11 @@
                         {{-- <td class="align-middle">{{ $rs->Detail }}</td> --}}
                         <td class="align-middle">
                             <div class="btn-group" role="group" aria-label="Basic example">
-                                <a href="{{ route('products.show', $rs->id) }}" type="button"
+                                <a href="{{ route('clusters.show', $rs->id) }}" type="button"
                                     class="btn btn-secondary">Detail</a>
-                                <a href="{{ route('products.edit', $rs->id) }}" type="button"
+                                <a href="{{ route('clusters.edit', $rs->id) }}" type="button"
                                     class="btn btn-warning">Edit</a>
-                                <form action="{{ route('products.destroy', $rs->id) }}" method="POST" type="button"
+                                <form action="{{ route('clusters.destroy', $rs->id) }}" method="POST" type="button"
                                     class="btn btn-danger p-0" onsubmit="return confirm('Delete?')">
                                     @csrf
                                     @method('DELETE')

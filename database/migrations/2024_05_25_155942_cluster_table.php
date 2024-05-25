@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('products', function (Blueprint $table) {
+        Schema::create('cluster', function (Blueprint $table) {
             $table->id();
             $table->string('nama_jalan');
             $table->string('panjang_jalan');
@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('titik_kerusakan');
             $table->string('lebar_kerusakan');
             $table->string('Status');
-            $table->string('Prioritas');
+            $table->string('categories');
             $table->timestamps();
         });
     }
@@ -33,6 +33,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('products');
+        Schema::dropIfExists('cluster');
     }
 };

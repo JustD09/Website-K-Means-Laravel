@@ -19,9 +19,78 @@
         </div>
     </div>
 
-    <div class="row mb-0">
-        <div id="chartData"></div>
+    <div class="card-deck">
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-primary shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                <h5 class="card-title">Total Users</h5>
+                                <p class="card-text display-4">{{ $userCount }}</p>
+                            </div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-user-check fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-success shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                <h5 class="card-title">Data Infrastruktur</h5>
+                                <p class="card-text display-4">{{ $productCount }}</p>
+                            </div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-road fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-warning shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+                                <h5 class="card-title">Data Cluster</h5>
+                                <p class="card-text display-4">{{ $clusterCount }}</p>
+                            </div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-road fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+
+    <div class="row">
+        <div class="col-12 position-relative">
+            <div class="right-corner">
+                <div id="chartData"></div>
+            </div>
+        </div>
+    </div>
+
+    {{-- <div class="row mb-4">
+        <div class="card border-left-primary shadow h-100 py-2">
+            <div class="card-body">
+                <h5 class="card-title">Total Users</h5>
+                <p class="card-text display-4">{{ $userCount }}</p>
+            </div>
+        </div>
+    </div> --}}
 
     <script type="text/javascript">
         const data = @json($jumlahCategory);
@@ -35,20 +104,20 @@
                 align: 'center'
             },
             xAxis: {
-                categories: ['Prioritas', 'Non-Prioritas'],
+                categories: ['Prioritas', 'Kurang Prioritas', 'Non-Prioritas'],
                 crosshair: true,
                 accessibility: {
-                    description: 'Data Infrastruktur'
+                    description: 'Grafik Data Cluster'
                 }
             },
             yAxis: {
                 min: 0,
                 title: {
-                    text: '1000 Meter (M)'
+                    text: 'Range Data Cluster'
                 }
             },
             tooltip: {
-                valueSuffix: ' (1000 M)'
+                valueSuffix: ' (Data Cluster Priority)'
             },
             plotOptions: {
                 column: {
@@ -78,16 +147,28 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <th>1</th> {{-- Numbering --}}
-                <th>Jl. A</th> {{-- Nama Jalan --}}
-                <th>2 KM</th> {{-- Panjang Jalan --}}
-                <th>xyz</th> {{-- Deskrips --}}
-                <th>2</th> {{-- Tingakat kerusakan dalam bentuk angka --}}
-                <th>3</th> {{-- Lebar Kerusakan dalam bentuk angka --}}
-                <th>Dalam Pengerjaan!</th> {{-- Status Pengerjaan --}}
-                <th>Prioritas</th> {{-- Status Prioritas --}}
-            </tr>
+            @foreach ($dataHasil as $rs)
+                <tr>
+                    <td class="align-middle">{{ $loop->iteration }}</td>
+                    <td class="align-middle">{{ $rs->nama_jalan }}</td>
+                    <td class="align-middle">{{ $rs->panjang_jalan }}</td>
+                    <td class="align-middle">{{ $rs->Deskripsi }}</td>
+                    <td class="align-middle">{{ $rs->titik_kerusakan }}</td>
+                    <td class="align-middle">{{ $rs->lebar_kerusakan }}</td>
+                    <td class="align-middle">{{ $rs->Status }}</td>
+                    <td class="align-middle">
+                        @if ($rs->categories == 1)
+                            Prioritas
+                        @endif
+                        @if ($rs->categories == 2)
+                            Kurang Prioritas
+                        @endif
+                        @if ($rs->categories == 3)
+                            Non Prioritas
+                        @endif
+                    </td>
+                </tr>
+            @endforeach
         </tbody>
     </table>
     {{-- <script src="{{ $chart->cdn() }}"></script> --}}

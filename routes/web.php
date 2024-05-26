@@ -5,10 +5,11 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ClusterController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ProfileController;
 use App\Models\Product;
 use App\Models\User;
 use App\Models\Cluster;
-use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
+
 
 Route::get('/', function () {
     return view('auth.login');
@@ -61,8 +62,7 @@ Route::middleware('auth')->group(function () {
         Route::delete('destroy/{id}', 'destroy')->name('clusters.destroy');
     });
  
-    Route::get('/profile', [App\Http\Controllers\AuthController::class, 'profile'])->name('profile');
-    Route::post('/profile.post', [App\Http\Controllers\AuthController::class, 'profile'])->name('profile.post');
-    Route::get('/showData', [App\Http\Controllers\AuthController::class,'showData'])->name('showData');
+    Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
+    Route::post('/profile',[ProfileController::class, 'update'])->name('profile.update');
     
 });

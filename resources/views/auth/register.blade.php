@@ -14,7 +14,7 @@
   <!-- Custom styles for this template-->
   <link href="{{ asset('admin_assets/css/sb-admin-2.min.css') }}" rel="stylesheet">
 </head>
-<body class="bg-gradient-primary">
+<body class="bg-gradient-success">
   <div class="container">
     <div class="card o-hidden border-0 shadow-lg my-5">
       <div class="card-body p-0">
@@ -40,6 +40,18 @@
                     <span class="invalid-feedback">{{ $message }}</span>
                   @enderror
                 </div>
+                <div class="form-group">
+                  <input name="phone" type="phone" class="form-control form-control-user @error('phone')is-invalid @enderror" id="phone" placeholder="Masukan Nomor Telpon">
+                  @error('phone')
+                    <span class="invalid-feedback">{{ $message }}</span>
+                  @enderror
+                </div>
+                <div class="form-group">
+                  <input name="address" type="address" class="form-control form-control-user @error('address')is-invalid @enderror" id="address" placeholder="Masukan Alamat Anda">
+                  @error('address')
+                    <span class="invalid-feedback">{{ $message }}</span>
+                  @enderror
+                </div>
                 <div class="form-group row">
                   <div class="col-sm-6 mb-3 mb-sm-0">
                     <input name="password" type="password" class="form-control form-control-user @error('password')is-invalid @enderror" id="exampleInputPassword" placeholder="Password">
@@ -54,7 +66,7 @@
                     @enderror
                   </div>
                 </div>
-                <button type="submit" class="btn btn-primary btn-user btn-block">Register Account</button>
+                <button type="submit" class="btn btn-outline-success btn-user btn-block">Register Account</button>
               </form>
               <hr>
               <div class="text-center">

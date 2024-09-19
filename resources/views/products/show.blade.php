@@ -1,58 +1,56 @@
 @extends('layouts.app')
 
-@section('title', 'Data Pembangunan Ruas Jalan')
+@section('title', 'Data Hasil Clustering')
 
 @section('contents')
-    <h1 class="mb-0">Detail Data Pembangunan Ruas Jalan</h1>
+    <h1 class="mb-0">Detail Data Hasil Clustering</h1>
     <hr />
     <div class="row">
         <div class="col mb-3">
-            <label class="form-label">Nama Jalan</label>
-            <input type="text" name="nama_jalan" class="form-control" placeholder="Nama Jalan"
-                value="{{ $product->nama_jalan }}" readonly>
-        </div>
-        <div class="col mb-3">
-            <label class="form-label">Panjang Jalan</label>
-            <input type="text" name="panjang_jalan " class="form-control" placeholder="Panjang Jalan"
-                value="{{ $product->panjang_jalan }}" readonly>
+            <label class="form-label">No. Ruas</label>
+            <input type="text" name="no_ruas" class="form-control" placeholder="No. Ruas" value="{{ $product->no_ruas }}"
+                readonly>
         </div>
     </div>
     <div class="row">
         <div class="col mb-3">
-            <label class="form-label">Deskripsi</label>
-            <input type="text" name="Deskripsi" class="form-control" placeholder="Deskripsi"
-                value="{{ $product->Deskripsi }}" readonly>
-        </div>
-        <div class="col mb-3">
-            <label class="form-label">Titik Kerusakan</label>
-            <textarea class="form-control" name="titik_kerusakan" placeholder="Titik Kerusakan" readonly>{{ $product->titik_kerusakan }}</textarea>
+            <label class="form-label">Nama Ruas</label>
+            <input type="text" name="nama_ruas " class="form-control" placeholder="Nama Ruas"
+                value="{{ $product->nama_ruas }}" readonly>
         </div>
     </div>
     <div class="row">
         <div class="col mb-3">
-            <label class="form-label">Lebar Kerusakan</label>
-            <input type="text" name="lebar_kerusakan" class="form-control" placeholder="Lebar Kerusakan"
-                value="{{ $product->lebar_kerusakan }}" readonly>
+            <label class="form-label">Cluster</label>
+            <input type="text" name="cluster" class="form-control" placeholder="Cluster" value="{{ $product->cluster }}"
+                readonly>
         </div>
+    </div>
+    <div class="row">
         <div class="col mb-3">
             <label class="form-label">Status</label>
-            <textarea class="form-control" name="Status" placeholder="Status" readonly>{{ $product->Status }}</textarea>
-        </div>
-        <div class="col mb-3">
-            <label class="form-label">Prioritas</label>
-            <textarea class="form-control" name="categories" placeholder="Prioritas" readonly>{{ $product->categories }}</textarea>
+            <input class="form-control" name="status" placeholder="Status" value="{{ $product->status }}" readonly>
         </div>
     </div>
     <div class="row">
         <div class="col mb-3">
-            <label class="form-label">Created At</label>
-            <input type="text" name="created_at" class="form-control" placeholder="Created At"
-                value="{{ $product->created_at }}" readonly>
+            <label class="form-label">Prioritas</label>
+            <input class="form-control" name="categories" placeholder="Prioritas" value="{{ $product->categories }}"
+                readonly>
         </div>
+    </div>
+    <div class="row">
         <div class="col mb-3">
-            <label class="form-label">Updated At</label>
-            <input type="text" name="updated_at" class="form-control" placeholder="Updated At"
-                value="{{ $product->updated_at }}" readonly>
+            <label class="form-label">Foto</label>
+            <div class="img-container">
+                <img name="image" type="img" class="img-fluid custom-img" id="image" readonly
+                    src="{{ asset('images/' . $product->image) }}" alt="Kerusakan" width="100">
+            </div>
+        </div>
+    </div>
+    <div class="mb-3">
+        <div class="d-grid text-center">
+            <a href="{{ route('products') }}" class="btn btn-outline-secondary">Kembali</a>
         </div>
     </div>
 @endsection

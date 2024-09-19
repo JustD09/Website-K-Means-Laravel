@@ -3,18 +3,18 @@
 namespace App\Http\Controllers;
   
 use Illuminate\Http\Request;
-use App\Models\Cluster;
+use App\Models\Ruas;
  
-class ClusterController extends Controller
+class RuasController extends Controller
 {
     /**
      * Display a listing of the resource. 
      */
     public function index()
     {
-        $cluster = Cluster::orderBy('created_at', 'DESC')->get();
+        $ruas = Ruas::orderBy('created_at', 'DESC')->get();
   
-        return view('clusters.index', compact('cluster'));
+        return view('ruas.index', compact('ruas'));
     }
   
     /**
@@ -22,7 +22,7 @@ class ClusterController extends Controller
      */
     public function create()
     {
-        return view('clusters.create');
+        return view('ruas.create');
     }
   
     /**
@@ -30,9 +30,9 @@ class ClusterController extends Controller
      */
     public function store(Request $request)
     {
-        Cluster::create($request->all());
+        Ruas::create($request->all());
  
-        return redirect()->route('clusters')->with('success', 'Data berhasil ditambahkan!');
+        return redirect()->route('ruas')->with('success', 'Data berhasil ditambahkan!');
     }
   
     /**
@@ -40,9 +40,9 @@ class ClusterController extends Controller
      */
     public function show(string $id)
     {
-        $cluster = Cluster::findOrFail($id);
+        $ruas = Ruas::findOrFail($id);
   
-        return view('clusters.show', compact('cluster'));
+        return view('ruas.show', compact('ruas'));
     }
   
     /**
@@ -50,9 +50,9 @@ class ClusterController extends Controller
      */
     public function edit(string $id)
     {
-        $cluster = Cluster::findOrFail($id);
+        $ruas = Ruas::findOrFail($id);
   
-        return view('clusters.edit', compact('cluster'));
+        return view('ruas.edit', compact('ruas'));
     }
   
     /**
@@ -60,11 +60,11 @@ class ClusterController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $cluster = Cluster::findOrFail($id);
+        $ruas = Ruas::findOrFail($id);
   
-        $cluster->update($request->all());
+        $ruas->update($request->all());
   
-        return redirect()->route('clusters')->with('success', 'Data berhasil diupdate!');
+        return redirect()->route('ruas')->with('success', 'Data berhasil diupdate!');
     }
   
     /**
@@ -72,10 +72,10 @@ class ClusterController extends Controller
      */
     public function destroy(string $id)
     {
-        $cluster = Cluster::findOrFail($id);
+        $ruas = Ruas::findOrFail($id);
   
-        $cluster->delete();
+        $ruas->delete();
   
-        return redirect()->route('clusters')->with('success', 'Data berhasil dihapus!');
+        return redirect()->route('ruas')->with('success', 'Data berhasil dihapus!');
     }
 }

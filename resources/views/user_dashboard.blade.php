@@ -1,6 +1,6 @@
-@extends('layouts.app')
+@extends('partials.app')
 
-@section('title', 'Penjadwalan Prioritas Pembangunan Infrastruktur Ruas Jalan')
+@section('title', 'Aplikasi Penjadwalan Prioritas Infrastruktur')
 {{-- @section('js')
     <script src="{{ $chart->cdn() }}"></script>
   {{ $chart->script() }}
@@ -11,7 +11,7 @@
     <script src="https://code.highcharts.com/modules/exporting.js"></script>
     <script src="https://code.highcharts.com/modules/accessibility.js"></script>
     <div class="row">
-        Kemen PUPR
+        DPUBMTR Prov Sumsel
     </div>
 
     <div class="row mb-1">
@@ -26,12 +26,12 @@
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                <h5 class="card-title">Total Users</h5>
-                                <p class="card-text display-4">{{ $userCount }}</p>
+                                <h5 class="card-title">Data Ruas</h5>
+                                <p class="card-text display-4">{{ $ruasCount }}</p>
                             </div>
                         </div>
                         <div class="col-auto">
-                            <i class="fas fa-user-check fa-2x text-gray-300"></i>
+                            <i class="fas fa-road fa-2x text-gray-300"></i>
                         </div>
                     </div>
                 </div>
@@ -73,12 +73,30 @@
                 </div>
             </div>
         </div>
+
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-danger shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+                                <h5 class="card-title">Data Kriteria</h5>
+                                <p class="card-text display-4">{{ $kriteriaCount }}</p>
+                            </div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-road fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <div class="row">
         <div class="col-12 position-relative">
             <div class="right-corner">
-                <div id="chartData"></div>
+                <div id="chartData" style="width:100%; height:400px;"></div>
             </div>
         </div>
     </div>
@@ -93,31 +111,32 @@
     </div> --}}
 
     <script type="text/javascript">
-        const data = @json($jumlahCategory);
-        const total = @json($totalCategory);
+        const jumlahC1 = @json($jumlahC1);
+        const jumlahC2 = @json($jumlahC2);
+        const jumlahC3 = @json($jumlahC3);
         Highcharts.chart('chartData', {
             chart: {
                 type: 'column'
             },
             title: {
-                text: 'Grafik Cluster',
+                text: 'Grafik Data Clustering',
                 align: 'center'
             },
             xAxis: {
-                categories: ['Prioritas', 'Kurang Prioritas', 'Non-Prioritas'],
+                categories: ['Tidak Prioritas', 'Kurang Prioritas', 'Prioritas'],
                 crosshair: true,
                 accessibility: {
-                    description: 'Grafik Data Cluster'
+                    description: 'Grafik Data Clustering'
                 }
             },
             yAxis: {
                 min: 0,
                 title: {
-                    text: 'Range Data Cluster'
+                    text: 'Range Data Clustering'
                 }
             },
             tooltip: {
-                valueSuffix: ' (Data Cluster Priority)'
+                valueSuffix: ' (Kategori Data Clustering)'
             },
             plotOptions: {
                 column: {
@@ -127,46 +146,43 @@
             },
             series: [{
                 name: 'Data Cluster',
-                data: total,
+                data: [jumlahC1, jumlahC2, jumlahC3],
             }, ]
         });
     </script>
 
 
     <table id="dataTable" class="table table-striped table-bordered" style="width:100%">
+        <h5 class="text-center">Data Clustering</h5>
         <thead>
             <tr>
-                <th>No</th>
-                <th>Nama Jalan</th>
-                <th>Panjang Jalan</th>
-                <th>Deskripsi</th>
-                <th>Titik Kerusakan</th>
-                <th>Lebar Kerusakan</th>
-                <th>Status</th>
-                <th>Prioritas</th>
+                <th class="text-center">Ruas</th>
+                <th class="text-center">STA Dari</th>
+                <th class="text-center">STA Ke</th>
+                <th class="text-center">Kondisi</th>
+                <th class="text-center">Jenis</th>
+                <th class="text-center">Ukuran Lubang</th>
+                <th class="text-center">Distance C1</th>
+                <th class="text-center">Distance C2</th>
+                <th class="text-center">Distance C3</th>
+                <th class="text-center">Cluster</th>
+                <th class="text-center">Keterangan</th>
             </tr>
         </thead>
         <tbody>
             @foreach ($dataHasil as $rs)
                 <tr>
-                    <td class="align-middle">{{ $loop->iteration }}</td>
-                    <td class="align-middle">{{ $rs->nama_jalan }}</td>
-                    <td class="align-middle">{{ $rs->panjang_jalan }}</td>
-                    <td class="align-middle">{{ $rs->Deskripsi }}</td>
-                    <td class="align-middle">{{ $rs->titik_kerusakan }}</td>
-                    <td class="align-middle">{{ $rs->lebar_kerusakan }}</td>
-                    <td class="align-middle">{{ $rs->Status }}</td>
-                    <td class="align-middle">
-                        @if ($rs->categories == 1)
-                            Prioritas
-                        @endif
-                        @if ($rs->categories == 2)
-                            Kurang Prioritas
-                        @endif
-                        @if ($rs->categories == 3)
-                            Non Prioritas
-                        @endif
-                    </td>
+                    <td class="align-middle text-center">{{ $rs->ruas }}</td>
+                    <td class="align-middle text-center">{{ $rs->sta_dari }}</td>
+                    <td class="align-middle text-center">{{ $rs->sta_ke }}</td>
+                    <td class="align-middle text-center">{{ $rs->kondisi }}</td>
+                    <td class="align-middle text-center">{{ $rs->jenis }}</td>
+                    <td class="align-middle text-center">{{ $rs->ukuran_lubang }}</td>
+                    <td class="align-middle text-center">{{ $rs->distanceC1 }}</td>
+                    <td class="align-middle text-center">{{ $rs->distanceC2 }}</td>
+                    <td class="align-middle text-center">{{ $rs->distanceC3 }}</td>
+                    <td class="align-middle text-center">{{ $rs->cluster }}</td>
+                    <td class="align-middle text-center">{{ $rs->kategori }}</td>
                 </tr>
             @endforeach
         </tbody>

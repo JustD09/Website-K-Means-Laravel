@@ -1,7 +1,7 @@
-<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+<ul class="navbar-nav bg-gradient-success sidebar sidebar-dark accordion" id="accordionSidebar">
 
     <!-- Sidebar - Brand -->
-    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ route('dashboard') }}">
+    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ route('admin.admin_dashboard') }}">
         <div class="sidebar-brand-icon">
             <i class="fas fa-fw fa-database"></i>
         </div>
@@ -13,28 +13,40 @@
 
     <!-- Nav Item - Dashboard -->
     <li class="nav-item">
-        <a class="nav-link" href="{{ route('dashboard') }}">
+        <a class="nav-link" href="{{ route('admin.admin_dashboard') }}">
             <i class="fas fa-fw fa-users"></i>
-            <span>Home</span></a>
+            <span>Halaman Utama</span></a>
     </li>
 
     <li class="nav-item">
         <a class="nav-link" href="{{ route('products') }}">
             <i class="fas fa-fw fa-user-plus"></i>
-            <span>Penambahan Data P2JN Kota Palembang</span></a>
+            <span>Hasil Clustering</span></a>
     </li>
 
     <li class="nav-item">
-        <a class="nav-link" href="{{ route('clusters') }}">
+        <a class="nav-link" href="{{ route('ruas') }}">
             <i class="fas fa-fw fa-list-alt"></i>
-            <span>Laporan Hasil Clustering</span></a>
+            <span>Data Ruas Jalan</span></a>
     </li>
 
-    {{-- <li class="nav-item">
-        <a class="nav-link" href="/profile">
-            <i class="fas fa-fw fa-user-edit"></i>
-            <span>Profile</span></a>
-    </li> --}}
+    <li class="nav-item">
+        <a class="nav-link" href="{{ route('kriteria') }}">
+            <i class="fas fa-fw fa-list-alt"></i>
+            <span>Data Kriteria</span></a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link" href="{{ route('perhitungan.index')}}">
+            <i class="fas fa-fw fa-list-alt"></i>
+            <span>Data Clustering</span></a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link" href="{{ route('clustering.index')}}">
+            <i class="fas fa-fw fa-list-alt"></i>
+            <span>Clustering</span></a>
+    </li>
 
     <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block">

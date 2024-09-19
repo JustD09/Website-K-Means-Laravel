@@ -5,8 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Post extends Model
+class Kriteria extends Model
 {
     use HasFactory;
-    protected $table = 'Products';
+
+    protected $table = 'kriteria';
+
+    protected $fillable = [
+        'kode',
+        'keterangan',
+    ];
 }

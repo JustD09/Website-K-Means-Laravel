@@ -10,12 +10,11 @@ class Product extends Model
     use HasFactory;
  
     protected $fillable = [
-        'nama_jalan',
-        'panjang_jalan',
-        'Deskripsi',
-        'titik_kerusakan',
-        'lebar_kerusakan',
-        'Status',
+        'no_ruas',
+        'nama_ruas',
+        'cluster',
+        'status',
         'categories',
+        'image',
     ];
 }

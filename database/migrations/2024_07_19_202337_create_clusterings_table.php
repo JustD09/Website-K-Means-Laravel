@@ -13,15 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('cluster', function (Blueprint $table) {
+        Schema::create('clusterings', function (Blueprint $table) {
             $table->id();
-            $table->string('nama_jalan');
-            $table->string('panjang_jalan');
-            $table->string('Deskripsi');
-            $table->string('titik_kerusakan');
-            $table->string('lebar_kerusakan');
-            $table->string('Status');
-            $table->string('categories');
+            $table->float('distance_c1');
+            $table->float('distance_c2');
+            $table->float('distance_c3');
+            $table->float('min_distance');
+            $table->string('cluster', 2);
             $table->timestamps();
         });
     }
@@ -33,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('cluster');
+        Schema::dropIfExists('clusterings');
     }
 };

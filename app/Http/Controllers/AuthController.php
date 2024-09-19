@@ -21,12 +21,16 @@ class AuthController extends Controller
         Validator::make($request->all(), [
             'name' => 'required',
             'email' => 'required|email',
+            'phone' => 'required',
+            'address' => 'required',
             'password' => 'required|confirmed'
         ])->validate();
-  
+
         User::create([
             'name' => $request->name,
             'email' => $request->email,
+            'phone' => $request->phone,
+            'address' => $request->address,
             'password' => Hash::make($request->password),
             'level' => 'Admin'
         ]);
@@ -38,23 +42,31 @@ class AuthController extends Controller
     {
         return view('auth/login');
     }
-  
+
     public function loginAction(Request $request)
     {
         Validator::make($request->all(), [
             'email' => 'required|email',
             'password' => 'required'
         ])->validate();
-  
+
         if (!Auth::attempt($request->only('email', 'password'), $request->boolean('remember'))) {
             throw ValidationException::withMessages([
                 'email' => trans('auth.failed')
-            ]);
+             ]);
         }
-  
+
         $request->session()->regenerate();
-  
-        return redirect()->route('dashboard');
+
+        $user = Auth::user();
+
+        if ($user->hasRole('admin')) {
+            return redirect()->route('admin.admin_dashboard');
+        } elseif ($user->hasRole('user')) {
+            return redirect()->route('user.user_dashboard');
+        } else {
+            return redirect('/welcome');
+        }
     }
   
     public function logout(Request $request)

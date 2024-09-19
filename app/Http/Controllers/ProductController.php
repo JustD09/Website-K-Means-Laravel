@@ -30,7 +30,30 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        Product::create($request->all());
+        $validated = $request->validate([
+            'no_ruas' => 'required|string|max:255',
+            'nama_ruas' => 'required|string|max:255',
+            'cluster' => 'required|string|max:255', // Pastikan format ini sesuai dengan input HTML
+            'status' => 'required|string|max:255',
+            'categories' => 'required|string|max:255',
+            'image' => 'required|image|max:2048',
+        ]);
+
+        $product = new Product();
+        $product->no_ruas = $validated['no_ruas'];
+        $product->nama_ruas = $validated['nama_ruas'];
+        $product->cluster = $validated['cluster'];
+        $product->status = $validated['status'];
+        $product->categories = $validated['categories'];
+
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $imageName = time() . '.' . $image->getClientOriginalExtension();
+            $image->move(public_path('images'), $imageName);
+            $product->image = $imageName;
+        }
+
+        $product->save();
  
         return redirect()->route('products')->with('success', 'Data berhasil ditambahkan!');
     }

@@ -1,11 +1,11 @@
 @extends('layouts.app')
 
-@section('title', 'Penambahan data pembangunan infrastruktur ruas jalan')
+@section('title', 'Hasil Clustering')
 
 @section('contents')
     <div class="d-flex align-items-center justify-content-between">
-        <h1 class="mb-0">Data Pembangunan Infrastruktur Ruas Jalan</h1>
-        <a href="{{ route('products.create') }}" class="btn btn-primary">Tambah Data</a>
+        <h1 class="mb-0">Hasil Clustering</h1>
+        <a href="{{ route('products.create') }}" class="btn btn-outline-success">Tambah Data</a>
     </div>
     <hr />
     @if (Session::has('success'))
@@ -13,18 +13,17 @@
             {{ Session::get('success') }}
         </div>
     @endif
-    <table class="table table-hover">
+    <table class="table table-hover" id="dataTable">
         <thead class="table-primary">
             <tr>
                 <th>No</th>
-                <th>Nama Jalan</th>
-                <th>Panjang Jalan</th>
-                <th>Deskripsi</th>
-                <th>Titik Kerusakan</th>
-                <th>Lebar Kerusakan</th>
+                <th>No. Ruas</th>
+                <th>Nama Ruas</th>
+                <th>Cluster</th>
                 <th>Status</th>
-                <th>Prioritas</th>
-                <th>Update, Delete, and Detail</th>
+                <th>Keterangan</th>
+                <th>Foto</th>
+                <th>Action</th>
             </tr>
         </thead>
         <tbody>
@@ -32,32 +31,21 @@
                 @foreach ($product as $rs)
                     <tr>
                         <td class="align-middle">{{ $loop->iteration }}</td>
-                        <td class="align-middle">{{ $rs->nama_jalan }}</td>
-                        <td class="align-middle">{{ $rs->panjang_jalan }}</td>
-                        <td class="align-middle">{{ $rs->Deskripsi }}</td>
-                        <td class="align-middle">{{ $rs->titik_kerusakan }}</td>
-                        <td class="align-middle">{{ $rs->lebar_kerusakan }}</td>
-                        <td class="align-middle">{{ $rs->Status }}</td>
-                        <td class="align-middle">
-                            @if ($rs->categories == 1)
-                                Prioritas
-                            @endif
-                            @if ($rs->categories == 2)
-                                Kurang Prioritas
-                            @endif
-                            @if ($rs->categories == 3)
-                                Non Prioritas
-                            @endif
-                        </td>
+                        <td class="align-middle">{{ $rs->no_ruas }}</td>
+                        <td class="align-middle">{{ $rs->nama_ruas }}</td>
+                        <td class="align-middle">{{ $rs->cluster }}</td>
+                        <td class="align-middle">{{ $rs->status }}</td>
+                        <td class="align-middle">{{$rs->categories}}</td>
+                        <td class="align-middle">{{$rs->image}}</td>
                         {{-- <td class="align-middle">{{ $rs->Detail }}</td> --}}
                         <td class="align-middle">
                             <div class="btn-group" role="group" aria-label="Basic example">
                                 <a href="{{ route('products.show', $rs->id) }}" type="button"
-                                    class="btn btn-secondary">Detail</a>
+                                    class="btn btn-outline-secondary">Detail</a>
                                 <a href="{{ route('products.edit', $rs->id) }}" type="button"
-                                    class="btn btn-warning">Edit</a>
+                                    class="btn btn-outline-warning">Edit</a>
                                 <form action="{{ route('products.destroy', $rs->id) }}" method="POST" type="button"
-                                    class="btn btn-danger p-0" onsubmit="return confirm('Delete?')">
+                                    class="btn btn-outline-danger p-0" onsubmit="return confirm('Delete?')">
                                     @csrf
                                     @method('DELETE')
                                     <button class="btn btn-danger m-0">Delete</button>
